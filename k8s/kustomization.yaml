@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: immich
+
+resources:
+  - 10-storage.yaml
+  - 20-sealed-secret.yaml
+  - 30-postgres.yaml
+  - 40-redis.yaml
+  - 50-immich-server.yaml
+  - 60-immich-ml.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: immich
