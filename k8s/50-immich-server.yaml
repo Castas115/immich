@@ -32,11 +32,13 @@ spec:
             - { name: REDIS_HOSTNAME, value: immich-redis }
             - { name: IMMICH_MACHINE_LEARNING_URL, value: "http://immich-machine-learning:3003" }
             - { name: TZ, value: "Europe/Madrid" }
+            - { name: NODE_EXTRA_CA_CERTS, value: /etc/ssl/custom/ca.crt }
           ports:
             - name: http
               containerPort: 2283
           volumeMounts:
             - { name: library, mountPath: /usr/src/app/upload }
+            - { name: home-ca-cert, mountPath: /etc/ssl/custom }
           resources:
             requests: { cpu: 200m, memory: 512Mi }
             limits: { memory: 4Gi }
@@ -52,6 +54,9 @@ spec:
         - name: library
           persistentVolumeClaim:
             claimName: immich-library
+        - name: home-ca-cert
+          configMap:
+            name: home-ca-cert
 ---
 apiVersion: v1
 kind: Service

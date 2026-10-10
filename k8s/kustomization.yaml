@@ -5,6 +5,7 @@ namespace: immich
 
 resources:
   - 10-storage.yaml
+  - 15-ca-cert.yaml
   - 20-sealed-secret.yaml
   - 30-postgres.yaml
   - 40-redis.yaml
